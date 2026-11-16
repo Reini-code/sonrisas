@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#fff9f6">
+  <meta name="description" content="Un jardín pequeño, lleno de flores y de motivos para sonreír.">
+  <meta property="og:title" content="Un jardín para una sonrisa 🌷">
+  <meta property="og:description" content="Hay sonrisas que hacen florecer los días. Te preparé una pequeña sorpresa.">
+  <meta property="og:type" content="website">
+  <title>Un jardín para una sonrisa 🌷</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght,SOFT,WONK@9..144,400,10,1;9..144,500,10,1;9..144,600,10,1&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --paper:#fff9f6; --paper2:#fff2ed; --ink:#493d42; --muted:#8e7c82;
+      --rose:#cf6c89; --rose2:#e8a0b2; --rose-pale:#ffdde4;
+      --gold:#d3aa65; --leaf:#668b73; --leaf2:#93ad8c;
+      --line:rgba(157,91,107,.14); --white:rgba(255,255,255,.73);
+      --shadow:0 24px 75px rgba(131,73,87,.12); --font-serif:'Fraunces',Georgia,serif;
+      --font-sans:'DM Sans',system-ui,-apple-system,sans-serif;
+      --ease:cubic-bezier(.2,.8,.2,1)
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth;scroll-padding-top:88px}
+    body{margin:0;overflow-x:hidden;color:var(--ink);font-family:var(--font-sans);background:var(--paper);-webkit-font-smoothing:antialiased;transition:background 1s,color .6s}
+    button,a{-webkit-tap-highlight-color:transparent}
+    button{font:inherit;cursor:pointer}
+    a{color:inherit;text-decoration:none}
+    button:focus-visible,a:focus-visible{outline:3px solid #c25782;outline-offset:5px}
+    ::selection{background:#f1bed0;color:#4d3543}
+    .sr-only{position:absolute;clip:rect(0,0,0,0);clip-path:inset(50%);width:1px;height:1px;overflow:hidden;white-space:nowrap}
+    .skip{position:absolute;left:15px;top:-80px;background:white;z-index:1000;padding:12px 18px;border-radius:30px}.skip:focus{top:14px}
+    .petals{position:fixed;inset:0;z-index:20;overflow:hidden;pointer-events:none;contain:layout paint}
+    .drift-petal{position:absolute;top:-12vh;width:13px;height:18px;border-radius:85% 0 85% 15%;background:linear-gradient(145deg,#f6b1c2aa,#ffdce4bb);opacity:.55;transform:rotate(25deg);animation:drift var(--duration) linear var(--delay) infinite;left:var(--left)}
+    @keyframes drift{0%{transform:translate3d(0,-10vh,0) rotate(0);opacity:0}10%{opacity:.55}90%{opacity:.5}100%{transform:translate3d(var(--travel),115vh,0) rotate(620deg);opacity:0}}
+    .site-nav{position:sticky;top:0;z-index:50;display:flex;justify-content:space-between;align-items:center;gap:20px;padding:15px clamp(22px,5.6vw,90px);border-bottom:1px solid var(--line);background:rgba(255,249,246,.87);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px)}
+    .brand{display:flex;align-items:center;gap:12px;min-width:0;font-size:13px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;white-space:nowrap}
+    .brand-icon{display:grid;place-items:center;width:38px;height:38px;border-radius:50%;background:#fce6e9;color:var(--rose);font-size:23px;font-weight:400;box-shadow:inset 0 0 0 1px #f8cfd9}
+    .nav-actions{display:flex;align-items:center;gap:25px}.nav-actions a{font-size:13px;color:#765e69;transition:color .2s}.nav-actions a:hover{color:var(--rose)}
+    .icon-btn{display:inline-grid;place-items:center;width:43px;height:43px;border-radius:50%;border:1px solid var(--line);background:#fff9;color:#9a6273;box-shadow:0 4px 20px #b35a7510;transition:transform .25s,background .3s}.icon-btn:hover{transform:translateY(-2px);background:#fff}
+    .icon-btn svg{width:19px;height:19px;stroke:currentColor;stroke-width:1.8;fill:none;stroke-linecap:round;stroke-linejoin:round}
+    .hero{position:relative;isolation:isolate;min-height:min(820px,calc(100svh - 70px));display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.08fr);align-items:center;max-width:1600px;margin:0 auto;padding:65px clamp(24px,7.1vw,120px) 90px;gap:24px}
+    .hero:before{content:"";position:absolute;z-index:-1;inset:0 0 auto auto;width:65%;height:98%;background:radial-gradient(ellipse at 55% 50%,#ffe8e7 0%,#fff0ed 42%,transparent 73%);pointer-events:none}
+    .eyebrow{display:flex;align-items:center;gap:12px;color:#b47b89;letter-spacing:.23em;text-transform:uppercase;font-size:11px;font-weight:700;margin:0 0 25px}.eyebrow:before{content:"";height:1px;width:34px;background:#c993a0}
+    .hero h1{font-family:var(--font-serif);font-weight:500;font-size:clamp(3.6rem,6.3vw,7.2rem);letter-spacing:-.063em;line-height:1.07;margin:0 0 23px;max-width:650px}
+    .hero h1 em{font-style:italic;font-weight:400;color:var(--rose)}
+    .hero h1 .soft-word{display:inline-block;white-space:nowrap}
+    .hero-desc{font-size:clamp(15px,1.24vw,18px);line-height:1.9;color:var(--muted);max-width:440px;margin:0 0 36px}
+    .hero-actions{display:flex;align-items:center;flex-wrap:wrap;gap:13px}
+    .btn{border:0;display:inline-flex;gap:13px;align-items:center;justify-content:center;padding:16px 24px;border-radius:50px;font-size:13px;letter-spacing:.03em;font-weight:700;transition:transform .3s var(--ease),box-shadow .3s var(--ease),background .3s}
+    .btn:hover{transform:translateY(-3px)}.btn-primary{background:#c9748f;color:white;box-shadow:0 12px 28px #bc66853b}.btn-primary:hover{background:#b95f7d;box-shadow:0 17px 35px #bc668550}
+    .btn-soft{background:rgba(255,255,255,.7);border:1px solid #edced7;color:#94677c}.btn-soft:hover{background:white}
+    .btn .arrow{font-size:19px;font-weight:400}
+    .mini-caption{display:flex;align-items:center;gap:10px;margin-top:51px;font-size:12px;letter-spacing:.02em;color:#ac8b92}.mini-caption:before{content:"✦";font-size:17px;color:#cb9e7b}
+    .hero-art{position:relative;min-height:560px;height:min(670px,65vw);display:grid;place-items:center}
+    .hero-art:before{content:"";position:absolute;inset:8% 3% 4%;border-radius:51% 49% 54% 46%;background:radial-gradient(circle at 43% 38%,#fffdf9 0%,#ffebe6 47%,#f8d8da 80%,#f8d8da00 81%);filter:blur(.5px);animation:halo-breathe 8s ease-in-out infinite alternate}
+    @keyframes halo-breathe{to{transform:scale(1.035) rotate(2deg)}}
+    .hero-illustration{position:relative;width:100%;height:100%;max-width:665px;overflow:visible;filter:drop-shadow(0 25px 22px #9f66651f);animation:float-bouquet 7s ease-in-out infinite alternate}
+    @keyframes float-bouquet{to{transform:translateY(-13px) rotate(1deg)}}
+    .hero-illustration .hero-bloom{transform-box:fill-box;transform-origin:center;animation:flower-awake 1.4s both var(--ease);animation-delay:var(--delay,0s)}
+    @keyframes flower-awake{from{opacity:0;scale:.3;rotate:-15deg}to{opacity:1;scale:1;rotate:0}}
+    .hero-art .float-label{position:absolute;z-index:3;background:#fffdfae6;border:1px solid #ffefe8;border-radius:100px;box-shadow:0 13px 34px #af7a8e20;padding:12px 18px;font-size:11px;font-weight:700;color:#a56e85;letter-spacing:.04em;backdrop-filter:blur(8px);animation:float-bouquet 5s ease-in-out infinite alternate}
+    .float-label.one{left:-2%;top:27%}.float-label.two{right:0%;bottom:19%;animation-delay:-3s}
+    .scroll-cue{position:absolute;bottom:29px;left:50%;transform:translateX(-50%);font-size:10px;color:#b697a0;letter-spacing:.22em;text-transform:uppercase;white-space:nowrap}
+    .scroll-cue span{display:block;width:1px;height:24px;background:#d0a6ab;margin:11px auto 0;animation:scroll-pulse 2s ease-in-out infinite}
+    @keyframes scroll-pulse{50%{transform:scaleY(.6);opacity:.5}}
+    .section{padding:105px clamp(22px,6vw,90px);position:relative;overflow:hidden}
+    .section-heading{text-align:center;max-width:660px;margin:0 auto 41px}.kicker{color:#bc8192;text-transform:uppercase;letter-spacing:.22em;font-weight:700;font-size:11px;margin:0 0 18px}
+    .section-heading h2,.notes-heading h2,.letter-copy h2{font-family:var(--font-serif);font-weight:500;letter-spacing:-.045em;line-height:1.14;font-size:clamp(2.7rem,5vw,5.1rem);margin:0 0 18px}
+    .section-heading h2 em,.notes-heading h2 em,.letter-copy h2 em{font-weight:400;color:var(--rose);font-style:italic}
+    .section-heading p:last-child{color:var(--muted);line-height:1.85;font-size:15px;margin:0 auto;max-width:485px}
+    .garden-section{background:linear-gradient(180deg,#fff9f6 0%,#fff4ef 32%,#ffeff0 100%)}
+    .garden-frame{max-width:1160px;margin:0 auto;position:relative;min-height:550px;border:1px solid #fffdf9;overflow:hidden;border-radius:30px;background:linear-gradient(180deg,#fffcf9 0%,#ffece8 66%,#f7ded9 100%);box-shadow:0 30px 80px #ad6d8130,0 0 0 1px #e7bfc32c;isolation:isolate}
+    .garden-sun{position:absolute;left:50%;top:10%;transform:translateX(-50%);width:190px;aspect-ratio:1;background:radial-gradient(circle,#fff6d5,#ffe5c8 58%,#ffe5c800 70%);border-radius:50%;filter:blur(2px);opacity:.85}
+    .garden-frame:before,.garden-frame:after{content:"";position:absolute;pointer-events:none}
+    .garden-frame:before{width:500px;height:260px;border-radius:50%;background:#fff8f3a1;filter:blur(70px);top:20%;left:-13%}
+    .garden-frame:after{inset:auto -10% -65px;background:linear-gradient(#b3c6aa,#92b398);height:126px;border-radius:50% 50% 0 0 / 46% 46% 0 0;z-index:0}
+    .garden-hill{position:absolute;bottom:24px;left:-10%;width:120%;height:105px;background:linear-gradient(180deg,#d6dabe,#b8cbb0);border-radius:50% 50% 0 0/100% 100% 0 0;z-index:0}
+    .garden-twinkle{position:absolute;left:var(--x);top:var(--y);color:#edc6af;font-size:var(--s);animation:twinkle 3s ease-in-out var(--d) infinite alternate;opacity:.65}
+    @keyframes twinkle{to{opacity:.17;transform:translateY(-8px) rotate(25deg)}}
+    .garden-label{position:absolute;z-index:4;top:28px;left:28px;display:flex;align-items:center;gap:9px;border-radius:50px;padding:11px 16px;color:#92767c;font-size:12px;font-weight:600;background:#fffdf9b9;box-shadow:0 8px 20px #b9848720;border:1px solid #fff}
+    .garden-label span{width:7px;height:7px;border-radius:50%;background:#8cad89;box-shadow:0 0 0 4px #8cad891f}
+    .garden-hint{position:absolute;z-index:6;top:30px;right:27px;color:#b5868d;font-size:12px;background:#fffafa90;padding:9px 13px;border-radius:30px}
+    .plant{--scale:1;--height:260px;--hue:0deg;position:absolute;bottom:37px;left:var(--x);width:120px;height:var(--height);padding:0;border:0;background:transparent;transform:translateX(-50%) scale(var(--scale)) scale(var(--mobile-scale,1));transform-origin:center bottom;z-index:calc(1 + var(--rank));outline-offset:0;filter:drop-shadow(0 9px 10px #715c5130)}
+    .plant:hover .plant-head,.plant:focus-visible .plant-head{transform:translate(-50%,-50%) rotate(-8deg) scale(1.13)}
+    .plant-stem{position:absolute;width:8px;height:calc(100% - 39px);bottom:0;left:50%;border-radius:50% 50% 5px 5px;background:linear-gradient(90deg,#527f67,#8bac7d,#5b846c);transform:translateX(-50%) rotate(var(--lean,0deg));transform-origin:bottom center;box-shadow:inset -2px 0 2px #3b795530}
+    .plant-leaf{position:absolute;width:54px;height:26px;background:linear-gradient(25deg,#5f8e74,#a4bb83);border-radius:100% 0 95% 0;left:51%;bottom:30%;transform:rotate(-27deg);transform-origin:left bottom;box-shadow:inset -8px -4px 9px #43735a23}
+    .plant-leaf.left{left:auto;right:50%;bottom:50%;transform-origin:right bottom;transform:scaleX(-1) rotate(-23deg)}
+    .plant-leaf:after{content:"";position:absolute;left:6px;top:50%;width:80%;height:1px;background:#e5e5b776;transform:rotate(-19deg)}
+    .plant-head{position:absolute;left:50%;top:32px;width:110px;height:110px;transform:translate(-50%,-50%);transition:transform .45s var(--ease);filter:hue-rotate(var(--hue));animation:flower-sway 5s ease-in-out calc(var(--rank)*-.7s) infinite alternate}
+    @keyframes flower-sway{to{rotate:5deg}}
+    .plant-petal{position:absolute;left:50%;top:50%;width:43px;height:57px;margin-left:-21.5px;margin-top:-50px;border-radius:65% 65% 55% 55%;background:radial-gradient(ellipse at 45% 20%,#ffe2e9 2%,#f6aac3 51%,#d77a9b 92%);border:1px solid #fff8f854;transform-origin:50% 50px;transform:rotate(calc(var(--i)*45deg));box-shadow:inset -4px -3px 10px #a5436415;transition:scale .55s var(--ease)}
+    .plant[data-color="peach"] .plant-petal{background:radial-gradient(ellipse at 45% 20%,#fff0dc,#ffc3ae 52%,#e78f91 95%)}
+    .plant[data-color="ivory"] .plant-petal{background:radial-gradient(ellipse at 45% 20%,#fffdf2,#ffefd9 55%,#e8cba4 100%)}
+    .plant[data-color="violet"] .plant-petal{background:radial-gradient(ellipse at 45% 20%,#fce5fb,#d9a8d9 56%,#bb85b6 100%)}
+    .plant[data-color="gold"] .plant-petal{background:radial-gradient(ellipse at 45% 20%,#fff7d8,#ffe49e 53%,#e6ae70 100%)}
+    .plant-center{position:absolute;left:50%;top:50%;width:33px;height:33px;transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff3bf,#e8b665 63%,#b7773e);border:3px solid #ffedbc;box-shadow:inset 0 0 0 3px #dca34c36,0 1px 4px #bc786730}
+    .plant.is-touched .plant-head{animation:pop-flower .65s var(--ease),flower-sway 5s ease-in-out  .65s infinite alternate}
+    .plant.is-touched .plant-petal{scale:1.03}
+    @keyframes pop-flower{0%{scale:.74;rotate:-15deg}55%{scale:1.24;rotate:12deg}100%{scale:1;rotate:0deg}}
+    .garden-message{z-index:8;position:absolute;top:91px;left:50%;width:min(430px,calc(100% - 38px));min-height:104px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:6px;padding:18px 23px;text-align:center;border-radius:20px;background:#fffdf9e8;box-shadow:0 12px 40px #a8728740;border:1px solid #fff;transform:translate(-50%,-10px) scale(.96);opacity:0;pointer-events:none;transition:opacity .35s,transform .35s}
+    .garden-message.show{opacity:1;transform:translate(-50%,0) scale(1)}.garden-message .tiny{color:var(--rose);font-size:10px;letter-spacing:.17em;text-transform:uppercase;font-weight:700}.garden-message p{font-family:var(--font-serif);line-height:1.45;font-size:clamp(16px,1.8vw,21px);margin:0}
+    .garden-progress{margin:22px auto 0;max-width:1160px;display:flex;align-items:center;justify-content:space-between;gap:16px;color:#987e84;font-size:12px;flex-wrap:wrap}
+    .progress-pips{display:flex;gap:7px}.pip{width:20px;height:5px;border-radius:10px;background:#edcfd1;transition:background .3s,transform .3s}.pip.done{background:#c5758e;transform:scaleY(1.3)}
+    .notes-section{background:#fffaf7;position:relative}.notes-section:before{content:"✳";position:absolute;color:#f3e1da;font-size:470px;right:-100px;top:-210px;font-family:serif;pointer-events:none}
+    .notes-inner{max-width:1180px;margin:auto;position:relative;z-index:1}.notes-heading{text-align:left;max-width:640px;margin-bottom:42px}.notes-heading p{font-size:12px;letter-spacing:.2em;color:#b77f91;font-weight:700;text-transform:uppercase}
+    .note-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}
+    .note-card{min-height:330px;background:#fff;display:flex;flex-direction:column;align-items:flex-start;text-align:left;padding:34px 32px 27px;border:1px solid #f1e2dd;border-radius:21px;box-shadow:0 12px 30px #ab68830d;transition:transform .4s var(--ease),box-shadow .3s;position:relative;overflow:hidden}
+    .note-card:hover{transform:translateY(-8px);box-shadow:0 23px 47px #ab68831c}
+    .note-card:after{content:"";position:absolute;right:-55px;bottom:-80px;width:210px;height:210px;border-radius:50%;background:var(--bubble);opacity:.64;transition:transform .7s;pointer-events:none}
+    .note-card:hover:after{transform:scale(1.18)}
+    .note-card:nth-child(1){--bubble:#ffe6ed}.note-card:nth-child(2){--bubble:#f6e8cb}.note-card:nth-child(3){--bubble:#e0e9d8}
+    .note-card .card-icon{font-size:44px;line-height:1;filter:drop-shadow(0 5px 6px #9e6e7225);margin-bottom:auto}
+    .note-card h3{font-family:var(--font-serif);font-size:29px;line-height:1.24;letter-spacing:-.04em;margin:28px 0 13px;font-weight:500;position:relative;z-index:1}
+    .note-card p{font-size:13px;line-height:1.85;color:#9b8589;margin:0;max-width:250px;position:relative;z-index:1}
+    .quote-band{padding:73px 24px;text-align:center;background:#f5e9e7;position:relative;overflow:hidden}
+    .quote-band:before,.quote-band:after{content:"❀";position:absolute;font-size:240px;color:#e9d3d2;top:-110px;left:-40px;transform:rotate(25deg)}.quote-band:after{left:auto;top:auto;right:-35px;bottom:-120px;transform:rotate(-18deg)}
+    .quote-band blockquote{max-width:870px;margin:0 auto;position:relative;font-family:var(--font-serif);font-size:clamp(1.85rem,3.65vw,3.6rem);font-weight:400;line-height:1.4;letter-spacing:-.035em;color:#7e5866}
+    .quote-band blockquote em{color:#b76e87}.quote-band .signature{font-size:11px;font-weight:700;color:#b58395;letter-spacing:.25em;text-transform:uppercase;margin:24px 0 0}
+    .letter-section{background:linear-gradient(145deg,#fff9f7,#fff1f0);padding-top:120px;padding-bottom:120px}
+    .letter-container{max-width:1120px;margin:auto;display:grid;grid-template-columns:1fr 1.1fr;align-items:center;gap:70px}
+    .letter-copy .kicker{margin:0 0 20px}.letter-copy h2{max-width:480px}.letter-copy>p:not(.kicker){color:var(--muted);max-width:415px;line-height:1.9;font-size:15px;margin:17px 0 29px}
+    .envelope-area{min-height:400px;display:grid;place-items:center;perspective:900px;position:relative}
+    .envelope-area:before{content:"";position:absolute;width:min(95%,440px);height:80%;border-radius:50%;background:#f6d9d6;filter:blur(48px);opacity:.65}
+    .envelope{width:min(100%,465px);height:290px;position:relative;filter:drop-shadow(0 30px 20px #ba7e9130);transform:rotate(-3deg);transition:transform .65s var(--ease)}
+    .envelope:hover{transform:rotate(0deg) translateY(-5px)}
+    .envelope-body{position:absolute;inset:0;background:#e9b9bd;border-radius:9px;overflow:hidden;box-shadow:inset 0 0 0 1px #db9da6}
+    .envelope-back{position:absolute;inset:0;background:#f4d2d1;clip-path:polygon(0 0,100% 0,50% 57%);z-index:1}
+    .envelope-front{position:absolute;inset:0;background:linear-gradient(155deg,#f3d1d0,#e4aeb6);clip-path:polygon(0 0,50% 56%,100% 0,100% 100%,0 100%);z-index:3}
+    .envelope-bottom{position:absolute;inset:0;background:#efc6c7;clip-path:polygon(0 100%,50% 40%,100% 100%);z-index:4}
+    .envelope-seal{position:absolute;left:50%;top:53%;transform:translate(-50%,-50%);z-index:5;background:#b9718c;color:#fff4ef;display:grid;place-items:center;width:69px;height:69px;border-radius:50%;font-size:30px;border:4px solid #c7839e;box-shadow:0 5px 12px #a45c7436;transition:scale .3s}
+    .envelope:hover .envelope-seal{scale:1.08}
+    .envelope-card{position:absolute;z-index:2;background:#fffdf9;inset:22px 32px 15px;display:grid;place-items:center;color:#a57187;text-align:center;font-family:var(--font-serif);font-style:italic;font-size:23px;border-radius:5px;box-shadow:0 0 0 1px #e8cdd0;transition:transform .7s var(--ease)}
+    .envelope.open .envelope-card{transform:translateY(-90px)}
+    .letter-text{max-width:1120px;margin:0 auto;max-height:0;overflow:hidden;opacity:0;transform:translateY(15px);transition:max-height .9s var(--ease),opacity .7s,transform .7s}
+    .letter-text.open{max-height:600px;opacity:1;transform:translateY(0)}
+    .letter-paper{margin:18px auto 0;padding:37px clamp(24px,6vw,70px);background:#fffdf9;border-radius:16px;max-width:740px;box-shadow:var(--shadow);border:1px solid #f0dedc;position:relative;text-align:center}
+    .letter-paper:before{content:"✿";display:block;color:#cb8197;font-size:32px;margin-bottom:13px}.letter-paper h3{font-family:var(--font-serif);font-size:31px;font-weight:500;letter-spacing:-.04em;margin:0 0 18px}.letter-paper p{line-height:2;color:#866f77;font-size:15px;margin:0 auto 13px;max-width:560px}.letter-paper .end-mark{font-size:24px;margin-top:18px;color:#c98898}
+    .footer{background:#f7eae7;text-align:center;padding:60px 24px 42px}.footer-flower{font-size:30px}.footer p{color:#947983;font-size:12px;margin:12px 0 22px;letter-spacing:.03em}.footer a{font-size:12px;color:#ab738a;font-weight:700;text-decoration:underline;text-underline-offset:5px}.footer .made{font-size:10px;color:#b79ba0;margin-top:36px}
+    .toast{position:fixed;z-index:120;left:50%;bottom:calc(22px + env(safe-area-inset-bottom));transform:translate(-50%,25px);background:#493c44;color:white;padding:13px 21px;border-radius:24px;font-size:12px;box-shadow:0 12px 35px #3c273540;opacity:0;pointer-events:none;transition:opacity .3s,transform .3s;white-space:nowrap;max-width:calc(100vw - 36px)}.toast.show{opacity:1;transform:translate(-50%,0)}
+    .burst-petal{position:absolute;width:12px;height:17px;border-radius:70% 0 70% 10%;background:var(--burst-color,#e7a1b1);z-index:12;pointer-events:none;left:var(--bx);top:var(--by);animation:burst .9s ease-out forwards}
+    @keyframes burst{to{transform:translate(var(--dx),var(--dy)) rotate(var(--rot));opacity:0}}
+    .reveal{opacity:0;transform:translateY(29px);transition:opacity .8s ease,transform .8s var(--ease)}.reveal.visible{opacity:1;transform:translateY(0)}
+    body.night{--paper:#261d2d;--ink:#fff0f2;--muted:#d0aebc;--line:#ffffff20;background:#261d2d}
+    body.night .site-nav{background:#291d31e0}body.night .nav-actions a{color:#dec0ce}body.night .icon-btn{background:#44334a;color:#ffb7d0}
+    body.night .hero:before{background:radial-gradient(ellipse at 55% 50%,#59344c 0%,#432d44 43%,transparent 74%)}
+    body.night .hero-art:before{background:radial-gradient(circle at 43% 38%,#7e5368 0%,#61394f 52%,#54324800 78%)}
+    body.night .garden-section{background:linear-gradient(#261d2d,#372a41)}body.night .garden-frame{background:linear-gradient(#382b4b,#54405d 80%,#73566a)}body.night .garden-sun{background:radial-gradient(circle,#fff9d9,#fff0b466 45%,transparent 72%)}
+    body.night .garden-hill{background:#6d806b}body.night .garden-frame:after{background:#4e6e58}body.night .garden-message{background:#4a344ae8;border-color:#806476;color:#fff5fa}body.night .garden-label,body.night .garden-hint{background:#3f2f45d9;color:#f2cbd7;border-color:#7d6072}
+    body.night .notes-section{background:#2e2435}body.night .note-card{background:#403447;border-color:#6e5263}body.night .note-card p{color:#d6b6c3}body.night .quote-band{background:#453149}body.night .quote-band blockquote{color:#ffe2ef}body.night .quote-band:before,body.night .quote-band:after{color:#624662}
+    body.night .letter-section{background:#302438}body.night .footer{background:#271c30}body.night .letter-paper{background:#41334a;border-color:#705468}body.night .letter-paper p{color:#e3cad3}body.night .letter-paper h3{color:white}
+    body.night .envelope-card{background:#fff9f6;color:#a57187}body.night .btn-soft{color:#ffbad0;background:#ffffff0d;border-color:#ffffff3c}body.night .mini-caption{color:#e4bdcb}
+    @media(max-width:900px){.hero{grid-template-columns:1fr;padding-top:69px;padding-bottom:80px;gap:0;min-height:auto}.hero-copy{position:relative;z-index:2}.hero h1{max-width:740px}.hero-art{height:min(650px,75vw);min-height:450px;margin-top:-20px}.hero-desc{max-width:580px}.scroll-cue{display:none}.note-grid{gap:13px}.note-card{padding:25px 22px;min-height:285px}.letter-container{gap:15px}.float-label.one{left:5%}.float-label.two{right:5%}}
+    @media(max-width:650px){html{scroll-padding-top:73px}.site-nav{padding:10px 18px}.brand{font-size:10px;gap:8px;letter-spacing:.07em}.brand-icon{width:34px;height:34px}.nav-actions{gap:8px}.nav-actions a{display:none}.icon-btn{width:38px;height:38px}.hero{padding:63px 23px 55px}.eyebrow{font-size:9px;letter-spacing:.16em;margin-bottom:22px}.hero h1{font-size:clamp(3.2rem,13.1vw,5.5rem);line-height:1.09;margin-bottom:17px}.hero-desc{line-height:1.75;font-size:14px;margin-bottom:25px}.btn{padding:15px 21px;font-size:12px}.mini-caption{margin-top:33px}.hero-art{min-height:300px;height:370px;margin:-15px -9px 0}.hero-art .float-label{font-size:9px;padding:9px 12px}.float-label.one{left:3%;top:28%}.float-label.two{right:2%;bottom:13%}.section{padding:77px 18px}.section-heading{margin-bottom:27px}.section-heading h2,.notes-heading h2,.letter-copy h2{font-size:clamp(2.6rem,10vw,4.3rem)}.section-heading p:last-child{font-size:14px}.garden-frame{border-radius:21px;min-height:450px}.garden-label{left:13px;top:14px;padding:9px 11px;font-size:10px}.garden-hint{top:55px;right:13px;font-size:10px;padding:7px 9px}.garden-sun{width:150px;top:14%}.garden-message{top:104px;min-height:85px;padding:12px}.garden-message p{font-size:16px}.garden-progress{justify-content:center;text-align:center;flex-direction:column;gap:11px}.plant{--mobile-scale:.67;bottom:30px}.notes-heading{margin-bottom:27px}.note-grid{grid-template-columns:1fr;gap:14px}.note-card{min-height:205px;padding:25px 25px 22px}.note-card .card-icon{font-size:35px}.note-card h3{margin:20px 0 9px;font-size:27px}.note-card p{max-width:90%}.quote-band{padding:67px 22px}.quote-band blockquote{font-size:clamp(2rem,7.5vw,3rem)}.letter-section{padding:80px 19px}.letter-container{grid-template-columns:1fr;gap:0}.letter-copy{text-align:center}.letter-copy h2,.letter-copy>p:not(.kicker){margin-left:auto;margin-right:auto}.envelope-area{min-height:315px}.envelope{width:min(85%,370px);height:235px}.envelope-seal{width:55px;height:55px;font-size:24px}.envelope-card{font-size:18px}.envelope.open .envelope-card{transform:translateY(-65px)}.letter-paper{padding:28px 22px}.letter-paper h3{font-size:27px}.letter-paper p{font-size:14px}.footer{padding:52px 18px 36px}}
+    @media(max-width:390px){.hero h1{font-size:12.5vw}.hero-art{height:310px;min-height:300px}.btn{padding:13px 17px}.garden-hint{font-size:9px}.plant{--mobile-scale:.58}}
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}.drift-petal{display:none}.reveal{opacity:1;transform:none}}
+  </style>
+</head>
+<body>
+  <a class="skip" href="#principal">Saltar al contenido</a>
+  <div class="petals" id="ambient-petals" aria-hidden="true"></div>
+
+  <header class="site-nav">
+    <a class="brand" href="#inicio" aria-label="Volver al inicio"><span class="brand-icon" aria-hidden="true">✿</span><span>Un detalle para ti</span></a>
+    <nav class="nav-actions" aria-label="Navegación principal">
+      <a href="#jardin">El jardín</a><a href="#detalles">Pequeñas cosas</a><a href="#carta">Tu nota</a>
+      <button class="icon-btn" id="theme-switch" type="button" title="Cambiar a jardín nocturno" aria-label="Cambiar a jardín nocturno" aria-pressed="false">
+        <svg id="theme-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 14.5A8.8 8.8 0 0 1 9.5 3.5a8.8 8.8 0 1 0 11 11Z"/></svg>
+      </button>
+      <button class="icon-btn" id="share-button" type="button" title="Compartir este jardín" aria-label="Compartir este jardín">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 16V3m0 0L7.5 7.5M12 3l4.5 4.5"/><path d="M5 13v6a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-6"/></svg>
+      </button>
+    </nav>
+  </header>
+
+  <main id="principal">
+    <section class="hero" id="inicio" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <p class="eyebrow">Una sorpresa hecha de pétalos</p>
+        <h1 id="hero-title">Hay sonrisas<br>que hacen<br><em class="soft-word">florecer</em> los días.</h1>
+        <p class="hero-desc">Dicen que las flores alegran cualquier lugar. Yo creo que algunas sonrisas también. Así que hice un pequeño rincón lleno de flores, solo porque sí. 🌷</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#jardin">Entrar al jardín <span class="arrow" aria-hidden="true">↗</span></a>
+          <a class="btn btn-soft" href="#carta">Hay una notita <span aria-hidden="true">✉</span></a>
+        </div>
+        <p class="mini-caption">Un lugar bonito para visitar cuando quieras.</p>
+      </div>
+      <div class="hero-art" aria-hidden="true">
+        <svg class="hero-illustration" viewBox="0 0 670 690" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <radialGradient id="petalRose"><stop stop-color="#ffe7eb"/><stop offset=".55" stop-color="#e7a0b2"/><stop offset="1" stop-color="#c75f83"/></radialGradient>
+            <radialGradient id="petalCream"><stop stop-color="#fffef3"/><stop offset=".63" stop-color="#ffe6d6"/><stop offset="1" stop-color="#eab4ab"/></radialGradient>
+            <radialGradient id="petalPeach"><stop stop-color="#fff4de"/><stop offset=".6" stop-color="#f5b4a2"/><stop offset="1" stop-color="#d98b9b"/></radialGradient>
+            <radialGradient id="petalLilac"><stop stop-color="#fff0fa"/><stop offset=".6" stop-color="#ddb5da"/><stop offset="1" stop-color="#ad83b7"/></radialGradient>
+            <linearGradient id="stemGreen"><stop stop-color="#688972"/><stop offset=".65" stop-color="#a6b68b"/><stop offset="1" stop-color="#527d66"/></linearGradient>
+            <g id="flower-rose">
+              <g fill="url(#petalRose)" stroke="#e6a2b2" stroke-width="1.5">
+                <ellipse cy="-35" rx="30" ry="46"/><ellipse cy="-35" rx="30" ry="46" transform="rotate(45)"/><ellipse cy="-35" rx="30" ry="46" transform="rotate(90)"/><ellipse cy="-35" rx="30" ry="46" transform="rotate(135)"/><ellipse cy="-35" rx="30" ry="46" transform="rotate(180)"/><ellipse cy="-35" rx="30" ry="46" transform="rotate(225)"/><ellipse cy="-35" rx="30" ry="46" transform="rotate(270)"/><ellipse cy="-35" rx="30" ry="46" transform="rotate(315)"/>
+              </g><circle r="27" fill="#f4bfd0"/><path d="M-14 -2C-12 -20 15 -20 16 -2C17 13 -12 16 -9 0C-8 -8 7 -8 6 0" fill="none" stroke="#b86386" stroke-width="4.5" stroke-linecap="round"/>
+            </g>
+            <g id="flower-cream"><g fill="url(#petalCream)" stroke="#f4ddcf" stroke-width="1.4"><ellipse cy="-35" rx="26" ry="45"/><ellipse cy="-35" rx="26" ry="45" transform="rotate(45)"/><ellipse cy="-35" rx="26" ry="45" transform="rotate(90)"/><ellipse cy="-35" rx="26" ry="45" transform="rotate(135)"/><ellipse cy="-35" rx="26" ry="45" transform="rotate(180)"/><ellipse cy="-35" rx="26" ry="45" transform="rotate(225)"/><ellipse cy="-35" rx="26" ry="45" transform="rotate(270)"/><ellipse cy="-35" rx="26" ry="45" transform="rotate(315)"/></g><circle r="25" fill="#e4af72"/><circle r="17" fill="#f3d49c"/><g fill="#c79250"><circle cy="-9" r="3"/><circle cx="10" cy="-4" r="3"/><circle cx="-8" cy="9" r="3"/><circle cx="7" cy="10" r="3"/></g></g>
+            <g id="flower-peach"><g fill="url(#petalPeach)" stroke="#efb6b1" stroke-width="1.5"><ellipse cy="-36" rx="28" ry="43"/><ellipse cy="-36" rx="28" ry="43" transform="rotate(51.4)"/><ellipse cy="-36" rx="28" ry="43" transform="rotate(102.8)"/><ellipse cy="-36" rx="28" ry="43" transform="rotate(154.2)"/><ellipse cy="-36" rx="28" ry="43" transform="rotate(205.6)"/><ellipse cy="-36" rx="28" ry="43" transform="rotate(257)"/><ellipse cy="-36" rx="28" ry="43" transform="rotate(308.4)"/></g><circle r="23" fill="#f6c49b"/><circle r="12" fill="#bd8867"/><circle r="7" fill="#ffe7bb"/></g>
+            <g id="flower-lilac"><g fill="url(#petalLilac)" stroke="#e3c6dd" stroke-width="1"><ellipse cy="-34" rx="26" ry="40"/><ellipse cy="-34" rx="26" ry="40" transform="rotate(60)"/><ellipse cy="-34" rx="26" ry="40" transform="rotate(120)"/><ellipse cy="-34" rx="26" ry="40" transform="rotate(180)"/><ellipse cy="-34" rx="26" ry="40" transform="rotate(240)"/><ellipse cy="-34" rx="26" ry="40" transform="rotate(300)"/></g><circle r="23" fill="#ffdc9c"/><circle r="13" fill="#e3a964"/></g>
+          </defs>
+          <g stroke="url(#stemGreen)" stroke-width="11" fill="none" stroke-linecap="round">
+            <path d="M325 615 Q200 470 184 315"/><path d="M322 615 Q322 425 330 220"/><path d="M326 615 Q425 430 474 315"/><path d="M323 615 Q245 470 99 440"/><path d="M326 615 Q416 500 545 457"/><path d="M326 615 Q371 444 392 155"/><path d="M320 615 Q250 480 259 397"/>
+          </g>
+          <g fill="#91ac8b" stroke="#6e987a" stroke-width="2" opacity=".95">
+            <path d="M271 496 Q184 422 154 482 Q214 525 271 496"/><path d="M365 486 Q440 406 460 456 Q413 504 365 486"/>
+            <path d="M251 408 Q172 374 176 423 Q230 456 251 408"/><path d="M339 375 Q400 304 415 350 Q383 385 339 375"/>
+            <path d="M422 404 Q491 367 503 402 Q460 431 422 404"/><path d="M294 326 Q239 275 214 301 Q251 350 294 326"/>
+            <path d="M356 261 Q390 213 423 230 Q414 273 356 261"/><path d="M432 357 Q453 287 480 299 Q481 340 432 357"/>
+            <path d="M232 520 Q179 486 150 514 Q187 556 232 520"/><path d="M407 529 Q481 496 489 530 Q452 559 407 529"/>
+          </g>
+          <g fill="none" stroke="#e6e5b8" stroke-width="1.2" opacity=".5"><path d="M271 496L167 478M365 486L456 456M251 408L181 421M339 375L409 349M422 404L500 404M294 326L217 303M356 261L421 231M432 357L475 301M232 520L156 515M407 529L484 529"/></g>
+          <g class="hero-bloom" style="--delay:.55s" transform="translate(184 305) scale(1.04)"><use href="#flower-rose"/></g>
+          <g class="hero-bloom" style="--delay:.2s" transform="translate(329 209) scale(1.3)"><use href="#flower-peach"/></g>
+          <g class="hero-bloom" style="--delay:.75s" transform="translate(471 313) scale(.96)"><use href="#flower-cream"/></g>
+          <g class="hero-bloom" style="--delay:.95s" transform="translate(109 431) scale(.76)"><use href="#flower-lilac"/></g>
+          <g class="hero-bloom" style="--delay:1.1s" transform="translate(550 446) scale(.85)"><use href="#flower-rose"/></g>
+          <g class="hero-bloom" style="--delay:.4s" transform="translate(389 153) scale(.77)"><use href="#flower-cream"/></g>
+          <g class="hero-bloom" style="--delay:1.25s" transform="translate(255 392) scale(.58)"><use href="#flower-peach"/></g>
+          <g fill="#d1ad88" opacity=".8"><path d="m82 220 4 10 10 4-10 4-4 10-4-10-10-4 10-4Z"/><path d="m557 211 3 9 10 3-10 3-3 9-3-9-10-3 10-3Z"/><path d="m569 551 3 8 8 3-8 3-3 8-3-8-8-3 8-3Z"/><circle cx="132" cy="160" r="3"/><circle cx="517" cy="143" r="4"/><circle cx="78" cy="352" r="3"/></g>
+          <g fill="#8d9e84" opacity=".8"><path d="M318 617Q274 572 248 592Q280 626 318 617"/><path d="M334 615Q368 557 401 576Q378 615 334 615"/></g>
+        </svg>
+        <span class="float-label one">✿ Una flor para ti</span><span class="float-label two">☀ Que tengas un día bonito</span>
+      </div>
+      <div class="scroll-cue" aria-hidden="true">Un poquito más abajo <span></span></div>
+    </section>
+
+    <section class="section garden-section" id="jardin" aria-labelledby="garden-title">
+      <div class="section-heading reveal">
+        <p class="kicker">01 — Un rincón especial</p>
+        <h2 id="garden-title">Un jardín que <em>responde</em> a ti.</h2>
+        <p>Las flores de aquí guardan pequeños mensajes. Tócalas una por una y mira lo que sucede. Cada pétalo tiene algo bonito que decirte.</p>
+      </div>
+      <div class="garden-frame reveal" id="garden-frame" aria-label="Jardín interactivo: toca las flores para revelar mensajes">
+        <div class="garden-sun" aria-hidden="true"></div><div class="garden-hill" aria-hidden="true"></div>
+        <div class="garden-label"><span></span> Jardín de pequeñas alegrías</div>
+        <div class="garden-hint">✦ Toca las flores</div>
+        <div class="garden-message" id="garden-message" role="status" aria-live="polite"><span class="tiny">Un pétalo dice...</span><p id="garden-phrase"></p></div>
+        <div id="flower-bed"></div>
+      </div>
+      <div class="garden-progress"><span id="garden-counter">0 de 9 florecitas descubiertas</span><div class="progress-pips" id="progress-pips" aria-label="Progreso en el jardín"></div><span>Un jardín bonito nunca tiene prisa. ♡</span></div>
+    </section>
+
+    <section class="section notes-section" id="detalles" aria-labelledby="notes-title">
+      <div class="notes-inner">
+        <div class="notes-heading reveal"><p>02 — Cosas que valen la pena</p><h2 id="notes-title">La belleza está en los <em>detalles.</em></h2></div>
+        <div class="note-grid">
+          <article class="note-card reveal"><span class="card-icon" aria-hidden="true">🌷</span><h3>Las flores pequeñas</h3><p>Porque los detalles sencillos también pueden hacer grande un momento.</p></article>
+          <article class="note-card reveal"><span class="card-icon" aria-hidden="true">☀️</span><h3>Las risas inesperadas</h3><p>Esas que aparecen de repente y consiguen mejorar cualquier día.</p></article>
+          <article class="note-card reveal"><span class="card-icon" aria-hidden="true">🦋</span><h3>Ser tú, sin más</h3><p>Porque no hace falta un motivo especial para celebrar la alegría que transmites.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="quote-band" aria-label="Una frase bonita"><blockquote class="reveal">«Ojalá la vida te regale tantas flores como razones tienes para <em>sonreír</em>».</blockquote><p class="signature">Un deseo sencillo, de corazón</p></section>
+
+    <section class="section letter-section" id="carta" aria-labelledby="letter-title">
+      <div class="letter-container">
+        <div class="letter-copy reveal"><p class="kicker">03 — Lo que quería decirte</p><h2 id="letter-title">Una notita entre <em>flores.</em></h2><p>A veces no hace falta una fecha especial para regalar algo bonito. Esta pequeña carta se puede abrir cuantas veces quieras.</p><button class="btn btn-primary" id="open-letter" type="button" aria-expanded="false" aria-controls="letter-text">Abrir mi notita <span class="arrow" aria-hidden="true">♡</span></button></div>
+        <div class="envelope-area reveal" aria-hidden="true"><div class="envelope" id="envelope"><div class="envelope-body"></div><div class="envelope-back"></div><div class="envelope-card">Unas palabras bonitas ♡</div><div class="envelope-front"></div><div class="envelope-bottom"></div><div class="envelope-seal">✿</div></div></div>
+      </div>
+      <div class="letter-text" id="letter-text"><div class="letter-paper"><h3>Para una sonrisa especial</h3><p>Hay personas que, sin proponérselo, hacen que los momentos más sencillos se sientan un poquito más alegres.</p><p>Tu sonrisa tiene algo de eso: aparece y parece que todo se llena de color. Por eso quise regalarte este jardín, con flores que no se marchitan y palabras que siempre estarán aquí.</p><p>Que nunca te falten los días tranquilos, las risas espontáneas, las florecitas y los motivos para seguir sonriendo.</p><div class="end-mark" aria-hidden="true">🌸 ✨ 🌷</div></div></div>
+    </section>
+  </main>
+
+  <footer class="footer"><div class="footer-flower" aria-hidden="true">✿</div><p>Que siempre encuentres un poquito de primavera.</p><a href="#inicio">Volver a las flores ↑</a><div class="made">Hecho con flores, píxeles y mucho cariño · ♡</div></footer>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script>
+  (()=>{
+    'use strict';
+    const $=sel=>document.querySelector(sel);
+    const reduceMotion=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let toastTimeout;
+    const toast=(text)=>{const el=$('#toast');el.textContent=text;el.classList.add('show');clearTimeout(toastTimeout);toastTimeout=setTimeout(()=>el.classList.remove('show'),3000)};
+
+    // Pétalos ambientales: los movimientos no bloquean botones ni toques.
+    if(!reduceMotion){
+      const ambient=$('#ambient-petals');
+      const count=window.innerWidth<=650?10:19;
+      for(let i=0;i<count;i++){
+        const petal=document.createElement('i');petal.className='drift-petal';
+        petal.style.setProperty('--left',`${(i*29.3+12)%100}%`);
+        petal.style.setProperty('--duration',`${14+(i%7)*2.6}s`);
+        petal.style.setProperty('--delay',`${-i*3.1}s`);
+        petal.style.setProperty('--travel',`${((i%5)-2)*40}px`);
+        petal.style.width=`${9+i%7}px`;petal.style.height=`${12+i%9}px`;
+        ambient.appendChild(petal);
+      }
+    }
+
+    // Un poco de brillo, incluso si no se pulsa ninguna flor.
+    for(let i=0;i<25;i++){
+      const dot=document.createElement('span');dot.className='garden-twinkle';dot.textContent=i%3===0?'✧':'✦';dot.setAttribute('aria-hidden','true');
+      dot.style.setProperty('--x',`${(i*37.21+11)%95}%`);
+      dot.style.setProperty('--y',`${(i*19.7+9)%66+12}%`);
+      dot.style.setProperty('--s',`${8+(i%4)*4}px`);
+      dot.style.setProperty('--d',`${-i*.43}s`);
+      $('#garden-frame').appendChild(dot);
+    }
+
+    const messages=[
+      'Que nunca se te acaben las razones para reír. ✨',
+      'Hay días bonitos que empiezan con una sonrisa. 🌷',
+      'Las cosas sencillas también merecen celebrarse.',
+      'Que lo bueno te encuentre siempre en el camino. ♡',
+      'Las flores son lindas, pero una sonrisa contagiosa también. 🌸',
+      'Ojalá hoy te pase algo que te haga reír muchísimo.',
+      'No olvides regalarte momentos bonitos, solo para ti. 🦋',
+      'Las mejores sorpresas llegan sin hacer ruido.',
+      'Y si el día se pone gris, aquí tendrás un poquito de primavera. ☀️'
+    ];
+    const flowers=[
+      {x:10,h:218,s:.84,color:'peach',lean:'-5deg'},
+      {x:20,h:276,s:1,color:'rose',lean:'5deg'},
+      {x:31,h:236,s:.88,color:'ivory',lean:'-3deg'},
+      {x:42,h:320,s:1.04,color:'violet',lean:'6deg'},
+      {x:52,h:258,s:1,color:'rose',lean:'-4deg'},
+      {x:63,h:302,s:.98,color:'gold',lean:'2deg'},
+      {x:73,h:222,s:.88,color:'ivory',lean:'-5deg'},
+      {x:83,h:286,s:1.02,color:'peach',lean:'4deg'},
+      {x:93,h:231,s:.8,color:'violet',lean:'-2deg'}
+    ];
+    const bed=$('#flower-bed'), progress=$('#progress-pips'), discovered=new Set();
+    flowers.forEach((flower,i)=>{
+      const button=document.createElement('button');button.type='button';button.className='plant';button.dataset.color=flower.color;
+      button.setAttribute('aria-label',`Descubrir flor ${i+1} de 9`);
+      button.style.setProperty('--x',`${flower.x}%`);button.style.setProperty('--height',`${flower.h}px`);button.style.setProperty('--rank',String(i%4));button.style.setProperty('--lean',flower.lean);
+      button.style.setProperty('--scale',`${flower.s}`);
+      let petals='';for(let p=0;p<8;p++)petals+=`<span class="plant-petal" style="--i:${p}"></span>`;
+      button.innerHTML=`<span class="plant-stem"></span><span class="plant-leaf left"></span><span class="plant-leaf"></span><span class="plant-head">${petals}<span class="plant-center"></span></span>`;
+      button.addEventListener('click',()=>{
+        discovered.add(i);button.classList.remove('is-touched');void button.offsetWidth;button.classList.add('is-touched');
+        const msg=$('#garden-message');msg.classList.remove('show');$('#garden-phrase').textContent=messages[i];requestAnimationFrame(()=>requestAnimationFrame(()=>msg.classList.add('show')));
+        $('#garden-counter').textContent=`${discovered.size} de 9 florecitas descubiertas`;
+        [...progress.children].forEach((el,j)=>el.classList.toggle('done',j<discovered.size));
+        if(!reduceMotion)burstAt(button);
+        if(discovered.size===9 && !progress.dataset.complete){progress.dataset.complete='yes';setTimeout(()=>toast('¡Descubriste todo el jardín! 🌷'),500)}
+      });
+      bed.appendChild(button);
+      const pip=document.createElement('span');pip.className='pip';pip.setAttribute('aria-hidden','true');progress.appendChild(pip);
+    });
+    function burstAt(button){
+      const garden=$('#garden-frame'),gr=garden.getBoundingClientRect(),b=button.getBoundingClientRect();
+      const x=b.left+b.width/2-gr.left,y=b.top+48-gr.top;
+      for(let i=0;i<13;i++){
+        const piece=document.createElement('i');piece.className='burst-petal';piece.setAttribute('aria-hidden','true');
+        piece.style.setProperty('--bx',`${x}px`);piece.style.setProperty('--by',`${y}px`);
+        piece.style.setProperty('--dx',`${Math.cos(i*2.399)* (60+(i%3)*22)}px`);
+        piece.style.setProperty('--dy',`${Math.sin(i*2.399)*(42+(i%3)*26)-20}px`);
+        piece.style.setProperty('--rot',`${i*97}deg`);
+        piece.style.setProperty('--burst-color',['#e9a0b3','#f8c6aa','#fff1cb','#d6b4dc'][i%4]);
+        garden.appendChild(piece);piece.addEventListener('animationend',()=>piece.remove(),{once:true});
+      }
+    }
+
+    const theme=$('#theme-switch');
+    theme.addEventListener('click',()=>{
+      const night=document.body.classList.toggle('night');theme.setAttribute('aria-pressed',String(night));
+      theme.setAttribute('aria-label',night?'Cambiar a jardín de día':'Cambiar a jardín nocturno');theme.title=night?'Volver al día':'Cambiar a jardín nocturno';
+      $('#theme-icon').innerHTML=night?'<circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42"/>':'<path d="M20.5 14.5A8.8 8.8 0 0 1 9.5 3.5a8.8 8.8 0 1 0 11 11Z"/>';
+      const color=document.querySelector('meta[name="theme-color"]');if(color)color.content=night?'#261d2d':'#fff9f6';
+    });
+
+    const open=$('#open-letter');open.addEventListener('click',()=>{
+      const isOpen=$('#letter-text').classList.toggle('open');$('#envelope').classList.toggle('open',isOpen);
+      open.setAttribute('aria-expanded',String(isOpen));open.innerHTML=isOpen?'Guardar la notita <span class="arrow">♡</span>':'Abrir mi notita <span class="arrow">♡</span>';
+      if(isOpen)setTimeout(()=>$('#letter-text').scrollIntoView({behavior:reduceMotion?'instant':'smooth',block:'nearest'}),320);
+    });
+    $('#share-button').addEventListener('click',async()=>{
+      if(location.protocol==='file:'){toast('Cuando la publiques, podrás compartir el enlace 🌷');return}
+      const data={title:document.title,text:'Te preparé un pequeño jardín de flores 🌷',url:location.href.split('#')[0]};
+      try{
+        if(navigator.share){await navigator.share(data);return}
+        if(navigator.clipboard?.writeText){await navigator.clipboard.writeText(data.url);toast('¡Enlace copiado! 🌷');return}
+        toast('Copia la dirección del navegador para compartirla 🌷');
+      }catch(err){if(err.name!=='AbortError')toast('Puedes compartir el enlace desde tu navegador')}
+    });
+    const reveals=document.querySelectorAll('.reveal');
+    if('IntersectionObserver'in window&&!reduceMotion){
+      const observer=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');observer.unobserve(e.target)}})},{threshold:.1,rootMargin:'0px 0px -20px 0px'});
+      reveals.forEach(el=>observer.observe(el));
+    }else reveals.forEach(el=>el.classList.add('visible'));
+  })();
+  </script>
+</body>
+</html>
